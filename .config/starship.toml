@@ -1,0 +1,124 @@
+# ~/.config/starship.toml
+
+# Inserts a blank line between shell prompts
+add_newline = false
+
+# Change command timeout from 500 to 1000 ms
+command_timeout = 10000
+
+# Change the default prompt format
+# ---
+# old config ...
+# format = """\
+# [╭╴](238)$env_var\
+# $all[╰─](238)$character"""
+
+# new config
+format = """
+$env_var\
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$git_metrics\
+$fill\
+$nodejs\
+$cmd_duration $jobs $time\
+$line_break\
+$character
+"""
+
+# Shows an icon that should be included by zshrc script based on the distribution or os
+[env_var.STARSHIP_DISTRO]
+format = '[$env_value](white)'
+variable = "STARSHIP_DISTRO"
+disabled = false
+
+# Shows the username
+[username]
+style_user = "009"
+style_root = "red"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = false
+format = "on [$hostname](bold yellow) "
+disabled = true
+
+[directory]
+truncation_length = 1
+truncation_symbol = "…/"
+truncate_to_repo = false
+home_symbol = "~"
+read_only_style = "197"
+read_only = " "
+format = "at [$path]($style)[$read_only]($read_only_style) "
+
+[character]
+success_symbol = "[❯](purple)"
+error_symbol = "[❯](red)"
+vicmd_symbol = "[❮](green)"
+
+[git_branch]
+symbol = " "
+format = "[$symbol$branch]($style) "
+style = "bright-black"
+
+[git_status]
+format = '[\($all_status$ahead_behind\)]($style) '
+style = "green"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+up_to_date = " "
+conflicted = "🏳"
+untracked = " "
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+stashed = " "
+modified = " "
+staged = '[++\($count\)](green)'
+renamed = "襁 "
+deleted = " "
+
+[git_state]
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
+style = "bright-black"
+
+[git_metrics]
+disabled = false
+
+[fill]
+symbol = " "
+
+[nodejs]
+format = "[$symbol($version )]($style)"
+
+[cmd_duration]
+format = "[$duration]($style)"
+style = "225"
+
+[jobs]
+symbol = ""
+style = "bold red"
+number_threshold = 1
+format = "[$symbol]($style)"
+
+[time]
+disabled = false
+style = "bold yellow"
+format = "[$time]($style)" 
+
+[memory_usage]
+symbol = " "
+
+[python]
+symbol = " "
+python_binary = "python3"
+disabled = true
+
+[ruby]
+format = "via [ $version]($style) "
+disabled = true
